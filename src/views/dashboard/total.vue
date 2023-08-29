@@ -9,7 +9,11 @@
     <el-row>
       <el-col :span="5">
         <div class="toubiao">
-          <img src="@/assets/total/data.png" alt />
+          <img
+            class="animate__animated animate__fadeInDown animate__delay-3s"
+            src="@/assets/total/data.png"
+            alt
+          />
           <span class="label">投标数</span>
           <count-to
             ref="zbnumb"
@@ -22,7 +26,11 @@
       </el-col>
       <el-col :span="5">
         <div class="toubiao">
-          <img src="@/assets/total/data1.png" alt />
+          <img
+            class="animate__animated animate__fadeInDown animate__delay-3s"
+            src="@/assets/total/data1.png"
+            alt
+          />
           <span class="label">中标数</span>
           <count-to
             ref="zhbnumb"
@@ -36,6 +44,7 @@
       <el-col :span="6">
         <div class="toubiao">
           <el-progress
+            class="animate__animated animate__fadeInDown animate__delay-3s"
             type="circle"
             :percentage="zbl"
             :width="48"
