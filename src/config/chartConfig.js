@@ -1,11 +1,17 @@
+const font_family = {
+  fontFamily: "PingFang SC, PingFang SC-Medium",
+};
+const textStyle = {
+  color: "#262d61",
+  fontSize: "16px",
+  fontWeight: "bold",
+  ...font_family,
+};
+
 export const chartCustomer_config = {
   title: {
     text: "招标情况-按客户",
-    textStyle: {
-      color: "#262d61",
-      fontSize: "16px",
-      fontWeight: "500",
-    },
+    textStyle,
     left: "left",
   },
   tooltip: {
@@ -20,6 +26,7 @@ export const chartCustomer_config = {
   legend: {
     data: ["投标数", "中标数", "中标率"],
     top: "30",
+    textStyle: font_family,
   },
   grid: {
     bottom: "15%",
@@ -31,6 +38,9 @@ export const chartCustomer_config = {
       data: [],
       axisPointer: {
         type: "shadow",
+      },
+      axisLabel: {
+        ...font_family,
       },
     },
   ],
@@ -88,16 +98,13 @@ export const chartCustomer_config = {
 export const chartKind_config = {
   title: {
     text: "招标情况-按险种",
-    textStyle: {
-      color: "#262d61",
-      fontSize: "16px",
-      fontWeight: "500",
-    },
+    textStyle,
     left: "left",
   },
 
   tooltip: {
     trigger: "item",
+    textStyle: font_family,
   },
   // legend: {
   //   orient: "horizontal",
@@ -141,7 +148,16 @@ export const chartGeo_config = {
       overflow: "break",
     },
     formatter: function (a) {
-      return `${a.name}<br />招标数${a.data.zbnumb}<br />投标数${a.data.zhbnumb}<br />中标率${a.data.zbl}`;
+      if (Array.isArray(a.data.subname)) {
+        const dataArr = a.data.subname.map((item, index) => {
+          return `${item}<br />招标数${a.data.zbnumb[index]}<br />中标数${a.data.zhbnumb[index]}<br />中标率${a.data.zbl[index]}`;
+        });
+        return dataArr.reduce((total, cur) => {
+          return total + cur + "<br />";
+        }, "");
+      } else {
+        return `${a.data.subname}<br />招标数${a.data.zbnumb}<br />中标数${a.data.zhbnumb}<br />中标率${a.data.zbl}`;
+      }
     },
     showDelay: 100,
   },
@@ -194,11 +210,7 @@ export const chartGeo_config = {
 export const chartCompany_config = {
   title: {
     text: "分公司投标情况",
-    textStyle: {
-      color: "#262d61",
-      fontSize: "16px",
-      fontWeight: "500",
-    },
+    textStyle,
     left: "left",
   },
   tooltip: {
@@ -213,6 +225,7 @@ export const chartCompany_config = {
   legend: {
     data: ["投标数", "中标数", "中标率"],
     top: "30",
+    textStyle: font_family,
   },
   xAxis: [
     {
@@ -223,6 +236,7 @@ export const chartCompany_config = {
       },
       axisLabel: {
         rotate: 45,
+        ...font_family,
       },
     },
   ],
@@ -289,11 +303,7 @@ export const chartCompany_config = {
 export const chartBusiness_config = {
   title: {
     text: "商机转化情况",
-    textStyle: {
-      color: "#262d61",
-      fontSize: "16px",
-      fontWeight: "500",
-    },
+    textStyle,
     left: "left",
   },
   tooltip: {
@@ -308,6 +318,7 @@ export const chartBusiness_config = {
   legend: {
     data: ["商机数", "立项数", "商机转化率"],
     top: "30",
+    textStyle: font_family,
   },
   grid: {
     right: "13%",
@@ -330,6 +341,7 @@ export const chartBusiness_config = {
       },
       axisLabel: {
         rotate: 45,
+        ...font_family,
       },
     },
   ],

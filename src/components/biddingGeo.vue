@@ -2,7 +2,7 @@
 * @Description: 材料申请处理时效
 * @Date: 2021-08-23 
 * @Author: xuyin
-* @LastEditTime: 2021-08-28
+* @LastEditTime: 2021-08-29
 -->
 <template>
   <section>
@@ -29,6 +29,20 @@ export default {
       myChart: "",
     };
   },
+  computed: {
+    zbnumb() {
+      return this.seriesData.reduce((total, cur) => total + cur.zbnumb, 0);
+    },
+    zhbnumb() {
+      return this.seriesData.reduce((total, cur) => total + cur.zhbnumb, 0);
+    },
+    zbl() {
+      const _zbl =
+        this.seriesData.reduce((total, cur) => total + cur.zbl_f, 0) /
+        this.seriesData.length;
+      return _zbl.toFixed(0) * 1;
+    },
+  },
   watch: {
     seriesData: {
       deep: true,
@@ -50,13 +64,57 @@ export default {
       this.initChart();
     },
     formatterData(seriesData) {
-      const _seriesData = JSON.parse(JSON.stringify(seriesData));
+      const _seriesData = JSON.parse(JSON.stringify(seriesData)).reduce(
+        (total, cur) => {
+          const idList = total.map((item) => item.id);
+          if (idList.includes(cur.id)) {
+            const index = idList.findIndex((id) => id === cur.id);
+            if (Array.isArray(total[index].name)) {
+              total[index].name = [...total[index].name, cur.name];
+              total[index].zbnumb = [...total[index].zbnumb, cur.zbnumb];
+              total[index].zhbnumb = [...total[index].zhbnumb, cur.zhbnumb];
+              total[index].zbl = [...total[index].zbl, cur.zbl];
+              total[index].zbl_f = [...total[index].zbl_f, cur.zbl_f];
+            } else {
+              total[index].name = [total[index].name, cur.name];
+              total[index].zbnumb = [total[index].zbnumb, cur.zbnumb];
+              total[index].zhbnumb = [total[index].zhbnumb, cur.zhbnumb];
+              total[index].zbl = [total[index].zbl, cur.zbl];
+              total[index].zbl_f = [total[index].zbl_f, cur.zbl_f];
+            }
+          } else {
+            total = [...total, cur];
+          }
+          return total;
+        },
+        []
+      );
+
       return _seriesData.map((data) => {
+        [data.subname, data.name] = [data.name, data.subname];
         return {
           ...data,
-          itemStyle: { areaColor: data.zhbnumb < 5 ? "#437EBD" : "#79bdfe" },
+          ...this.formatterColor(data.zbl_f, this.zbl),
         };
       });
+    },
+    formatterColor(value, target) {
+      let areaColor = "";
+      if (Array.isArray(value)) {
+        if (value.some((item) => item >= target)) {
+          areaColor = "#79bdfe";
+        } else if (value.some((item) => item < target)) {
+          areaColor = "#83B7EE";
+        } else if (value.some((item) => item == 0)) {
+          areaColor = "#437EBD";
+        }
+      } else {
+        areaColor =
+          value == 0 ? "#437EBD" : value < target ? "#83B7EE" : "#79bdfe";
+      }
+      return {
+        itemStyle: { areaColor },
+      };
     },
   },
 };

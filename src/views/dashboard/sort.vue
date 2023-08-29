@@ -128,6 +128,7 @@ export default {
     }
     span {
       line-height: 10px;
+      margin-right: 4px;
     }
   }
 }

@@ -103,12 +103,7 @@ export default {
     },
     zbl() {
       const _zbl =
-        (this.seriesData.reduce(
-          (total, cur) =>
-            total + (cur.zbnumb == 0 ? 0 : cur.zhbnumb / cur.zbnumb),
-          0
-        ) *
-          100) /
+        this.seriesData.reduce((total, cur) => total + cur.zbl_f, 0) /
         this.seriesData.length;
       return _zbl.toFixed(0) * 1;
     },

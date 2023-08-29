@@ -31,7 +31,11 @@
               <biddingGeo
                 :seriesData="dataGeo"
                 ref="biddingGeo"
-                class="animate__animated animate__zoomIn animate__delay-4s animate__slower"
+                :class="
+                  dataGeo.length > 0
+                    ? 'animate__animated animate__zoomIn animate__delay-3s animate__slower'
+                    : ''
+                "
               />
             </el-row>
             <el-row v-loading="dataGeoLoading">
@@ -117,7 +121,7 @@ export default {
           if (data.zbnumb == 0) {
             data.zbl_f = 0;
           } else {
-            data.zbl_f = ((data.zhbnumb / data.zbnumb) * 100).toFixed(0);
+            data.zbl_f = ((data.zhbnumb / data.zbnumb) * 100).toFixed(0) * 1;
           }
         });
       }
@@ -135,6 +139,7 @@ export default {
             this.dateObj.startOf("year").format("YYYY-MM-DD"),
             this.dateObj.format("YYYY-MM-DD"),
           ];
+      this.dataGeo = [];
       this.$refs.total.reset();
     },
     handleResize() {
