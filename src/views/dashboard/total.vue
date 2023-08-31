@@ -2,36 +2,19 @@
 * @Description: 看板总数统计
 * @Date: 2023-08-18
 * @Author: xuyin
-* @LastEditTime: 2023-08-28
+* @LastEditTime: 2023-08-30
 -->
 <template>
   <section class="total" v-if="seriesData.length > 0">
     <el-row>
-      <el-col :span="5">
+      <el-col :span="8">
         <div class="toubiao">
           <img
-            class="animate__animated animate__fadeInDown animate__delay-3s"
+            class="animate__animated animate__rollIn animate__delay-3s animate__slower"
             src="@/assets/total/data.png"
             alt
           />
           <span class="label">投标数</span>
-          <count-to
-            ref="zbnumb"
-            :start-val="0"
-            :end-val="zbnumb"
-            :duration="duration"
-            class="value"
-          />
-        </div>
-      </el-col>
-      <el-col :span="5">
-        <div class="toubiao">
-          <img
-            class="animate__animated animate__fadeInDown animate__delay-3s"
-            src="@/assets/total/data1.png"
-            alt
-          />
-          <span class="label">中标数</span>
           <count-to
             ref="zhbnumb"
             :start-val="0"
@@ -39,12 +22,31 @@
             :duration="duration"
             class="value"
           />
+          <span>个</span>
         </div>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="8">
+        <div class="toubiao">
+          <img
+            class="animate__animated animate__fadeInUp animate__delay-3s animate__slower"
+            src="@/assets/total/data1.png"
+            alt
+          />
+          <span class="label">中标数</span>
+          <count-to
+            ref="zbnumb"
+            :start-val="0"
+            :end-val="zbnumb"
+            :duration="duration"
+            class="value"
+          />
+          <span>个</span>
+        </div>
+      </el-col>
+      <el-col :span="8">
         <div class="toubiao">
           <el-progress
-            class="animate__animated animate__fadeInDown animate__delay-3s"
+            class="animate__animated animate__fadeInRight animate__delay-3s animate__slower"
             type="circle"
             :percentage="zbl"
             :width="48"
@@ -62,20 +64,6 @@
             />
             <span class="percent">%</span>
           </span>
-        </div>
-      </el-col>
-      <el-col :span="8">
-        <div class="toubiao">
-          <el-date-picker
-            v-model="selectTime"
-            type="daterange"
-            range-separator="~"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            size="mini"
-            value-format="yyyy-MM-dd"
-            @change="change"
-          ></el-date-picker>
         </div>
       </el-col>
     </el-row>
@@ -99,7 +87,6 @@ export default {
   },
   data() {
     return {
-      selectTime: [],
       duration: 4000,
     };
   },
@@ -111,16 +98,10 @@ export default {
       return this.seriesData.reduce((total, cur) => total + cur.zhbnumb, 0);
     },
     zbl() {
-      const _zbl =
-        this.seriesData.reduce((total, cur) => total + cur.zbl_f, 0) /
-        this.seriesData.length;
-      return _zbl.toFixed(0) * 1;
+      return ((this.zbnumb / this.zhbnumb) * 100).toFixed(0) * 1;
     },
   },
   methods: {
-    change(time) {
-      this.$emit("getTime", time);
-    },
     reset() {
       this.$refs.zbnumb.start();
       this.$refs.zhbnumb.start();

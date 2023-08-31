@@ -2,7 +2,7 @@
 * @Description: 材料申请处理时效
 * @Date: 2021-08-23 
 * @Author: xuyin
-* @LastEditTime: 2021-08-29
+* @LastEditTime: 2021-08-31
 -->
 <template>
   <section>
@@ -37,10 +37,7 @@ export default {
       return this.seriesData.reduce((total, cur) => total + cur.zhbnumb, 0);
     },
     zbl() {
-      const _zbl =
-        this.seriesData.reduce((total, cur) => total + cur.zbl_f, 0) /
-        this.seriesData.length;
-      return _zbl.toFixed(0) * 1;
+      return ((this.zbnumb / this.zhbnumb) * 100).toFixed(0) * 1;
     },
   },
   watch: {
@@ -89,7 +86,7 @@ export default {
         },
         []
       );
-
+      console.log("this.zbl", this.zbl);
       return _seriesData.map((data) => {
         [data.subname, data.name] = [data.name, data.subname];
         return {
@@ -104,13 +101,13 @@ export default {
         if (value.some((item) => item >= target)) {
           areaColor = "#79bdfe";
         } else if (value.some((item) => item < target)) {
-          areaColor = "#83B7EE";
+          areaColor = "#449FFF";
         } else if (value.some((item) => item == 0)) {
           areaColor = "#437EBD";
         }
       } else {
         areaColor =
-          value == 0 ? "#437EBD" : value < target ? "#83B7EE" : "#79bdfe";
+          value == 0 ? "#437EBD" : value < target ? "#449FFF" : "#79bdfe";
       }
       return {
         itemStyle: { areaColor },

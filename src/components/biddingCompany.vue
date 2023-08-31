@@ -2,7 +2,7 @@
 * @Description: 分公司投标情况
 * @Date: 2021-08-23 
 * @Author: xuyin
-* @LastEditTime: 2021-08-23 
+* @LastEditTime: 2021-08-30 
 -->
 <template>
   <section>
@@ -45,8 +45,8 @@ export default {
     },
     getCompany() {
       this.option.xAxis[0].data = this.seriesData.map((data) => data.name);
-      this.option.series[0].data = this.seriesData.map((data) => data.zbnumb);
-      this.option.series[1].data = this.seriesData.map((data) => data.zhbnumb);
+      this.option.series[0].data = this.seriesData.map((data) => data.zhbnumb);
+      this.option.series[1].data = this.seriesData.map((data) => data.zbnumb);
       this.option.series[2].data = this.seriesData.map((data) => data.zbl_f);
       this.initChart();
     },

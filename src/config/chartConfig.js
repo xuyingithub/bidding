@@ -7,7 +7,11 @@ const textStyle = {
   fontWeight: "bold",
   ...font_family,
 };
-
+const titleRich = {
+  width: 25,
+  height: 15,
+  borderRadius: 5,
+};
 export const chartCustomer_config = {
   title: {
     text: "招标情况-按客户",
@@ -71,6 +75,25 @@ export const chartCustomer_config = {
         },
       },
       data: [],
+      itemStyle: {
+        color: {
+          type: "linear", // 设置渐变颜色
+          x: 0, // 渐变起点的 x 坐标
+          y: 0, // 渐变起点的 y 坐标
+          x2: 0, // 渐变终点的 x 坐标
+          y2: 1, // 渐变终点的 y 坐标
+          colorStops: [
+            {
+              offset: 0, // 渐变起点的颜色
+              color: "rgba(0, 0, 255, 1)", // rgba 格式的颜色
+            },
+            {
+              offset: 1, // 渐变终点的颜色
+              color: "rgba(0, 0, 0, 0)",
+            },
+          ],
+        },
+      },
     },
     {
       name: "中标数",
@@ -81,6 +104,25 @@ export const chartCustomer_config = {
         },
       },
       data: [],
+      itemStyle: {
+        color: {
+          type: "linear", // 设置渐变颜色
+          x: 0, // 渐变起点的 x 坐标
+          y: 0, // 渐变起点的 y 坐标
+          x2: 0, // 渐变终点的 x 坐标
+          y2: 1, // 渐变终点的 y 坐标
+          colorStops: [
+            {
+              offset: 0, // 渐变起点的颜色
+              color: "rgba(0, 255, 0, 1)", // rgba 格式的颜色
+            },
+            {
+              offset: 1, // 渐变终点的颜色
+              color: "rgba(0, 0, 0, 0)",
+            },
+          ],
+        },
+      },
     },
     {
       name: "中标率",
@@ -92,6 +134,9 @@ export const chartCustomer_config = {
         },
       },
       data: [],
+      itemStyle: {
+        color: "#d48265",
+      },
     },
   ],
 };
@@ -105,6 +150,9 @@ export const chartKind_config = {
   tooltip: {
     trigger: "item",
     textStyle: font_family,
+    formatter: function (a) {
+      return `${a.data.name}<br />招标数${a.data.zhbnumb}<br />中标数${a.data.value}<br />中标率${a.data.zbl}`;
+    },
   },
   // legend: {
   //   orient: "horizontal",
@@ -150,16 +198,41 @@ export const chartGeo_config = {
     formatter: function (a) {
       if (Array.isArray(a.data.subname)) {
         const dataArr = a.data.subname.map((item, index) => {
-          return `${item}<br />招标数${a.data.zbnumb[index]}<br />中标数${a.data.zhbnumb[index]}<br />中标率${a.data.zbl[index]}`;
+          return `${item}<br />投标数${a.data.zhbnumb[index]}个<br />中标数${a.data.zbnumb[index]}个<br />中标率${a.data.zbl[index]}`;
         });
         return dataArr.reduce((total, cur) => {
           return total + cur + "<br />";
         }, "");
       } else {
-        return `${a.data.subname}<br />招标数${a.data.zbnumb}<br />中标数${a.data.zhbnumb}<br />中标率${a.data.zbl}`;
+        return `${a.data.subname}<br />投标数${a.data.zhbnumb}个<br />中标数${a.data.zbnumb}个<br />中标率${a.data.zbl}`;
       }
     },
     showDelay: 100,
+  },
+  title: {
+    text: "{a|} 0 {b|} [0,平均中标率] {c|} >= 平均中标率",
+    textStyle: {
+      fontSize: "12px",
+      ...font_family,
+      rich: {
+        a: {
+          ...titleRich,
+          backgroundColor: "#437EBD",
+        },
+        b: {
+          ...titleRich,
+          backgroundColor: "#449FFF",
+        },
+        c: {
+          ...titleRich,
+          backgroundColor: "#79bdfe",
+        },
+        d: {
+          whiteSpace: "pre",
+        },
+      },
+    },
+    left: "left",
   },
   series: [
     {
@@ -169,14 +242,14 @@ export const chartGeo_config = {
         // 通常状态下的样式
         normal: {
           // show: true,
-          textStyle: {
-            color: "#fff",
-          },
+          // textStyle: {
+          // color: "#fff",
+          // },
         },
         // 鼠标放上去的样式
         emphasis: {
           textStyle: {
-            color: "#fff",
+            color: "#262D61",
           },
         },
       },
@@ -262,7 +335,7 @@ export const chartCompany_config = {
       type: "slider", // 使用滑动条型的 dataZoom
       xAxisIndex: 0, // 对应横向坐标轴
       start: 0, // 起始位置（百分比）
-      end: 50, // 结束位置（百分比）
+      end: 20, // 结束位置（百分比）
       height: 10,
     },
   ],
@@ -276,6 +349,25 @@ export const chartCompany_config = {
         },
       },
       data: [],
+      itemStyle: {
+        color: {
+          type: "linear",
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [
+            {
+              offset: 0,
+              color: "#3D84FB", // 浅蓝色
+            },
+            {
+              offset: 1,
+              color: "#6BC4FF", // 深蓝色
+            },
+          ],
+        },
+      },
     },
     {
       name: "中标数",
@@ -286,6 +378,25 @@ export const chartCompany_config = {
         },
       },
       data: [],
+      itemStyle: {
+        color: {
+          type: "linear",
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [
+            {
+              offset: 0,
+              color: "#1DF4C4", // 浅绿色
+            },
+            {
+              offset: 1,
+              color: "#00D09F", // 深绿色
+            },
+          ],
+        },
+      },
     },
     {
       name: "中标率",
@@ -297,6 +408,9 @@ export const chartCompany_config = {
         },
       },
       data: [],
+      itemStyle: {
+        color: "#fc9001",
+      },
     },
   ],
 };
@@ -328,7 +442,7 @@ export const chartBusiness_config = {
       type: "slider", // 使用滑动条型的 dataZoom
       xAxisIndex: 0, // 对应横向坐标轴
       start: 0, // 起始位置（百分比）
-      end: 50, // 结束位置（百分比）
+      end: 10, // 结束位置（百分比）
       height: 10,
     },
   ],

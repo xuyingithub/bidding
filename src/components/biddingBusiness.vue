@@ -2,7 +2,7 @@
 * @Description: 商机转化情况
 * @Date: 2021-08-23 
 * @Author: xuyin
-* @LastEditTime: 2021-08-23 
+* @LastEditTime: 2021-08-30 
 -->
 <template>
   <section class="business" v-loading="businessLoading">
@@ -56,18 +56,13 @@ export default {
       this.businessLoading = false;
       if (res && res.status == "1") {
         const dataBusiness = res.list;
-        // 构造随机数
-        dataBusiness.forEach((data) => {
-          data.zhbnumb = Math.floor(Math.random() * 100);
-          data.zbnumb = data.zhbnumb + Math.floor(Math.random() * 100);
-        });
         this.option.xAxis[0].data = dataBusiness.map((data) =>
-          data.name.replace("分公司", "")
+          data.name.replace("分公司", "").replace("总公司", "")
         );
-        this.option.series[0].data = dataBusiness.map((data) => data.zbnumb);
-        this.option.series[1].data = dataBusiness.map((data) => data.zhbnumb);
+        this.option.series[0].data = dataBusiness.map((data) => data.sjs);
+        this.option.series[1].data = dataBusiness.map((data) => data.lxs);
         this.option.series[2].data = dataBusiness.map((data) =>
-          ((data.zhbnumb / data.zbnumb) * 100).toFixed(0)
+          data.sjs == 0 ? 0 : ((data.lxs / data.sjs) * 100).toFixed(0) * 1
         );
         this.initChart();
       }

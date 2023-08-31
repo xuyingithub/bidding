@@ -2,13 +2,28 @@
 * @Description: dashboard
 * @Date: 2021-08-23 
 * @Author: xuyin
-* @LastEditTime: 2021-08-28
+* @LastEditTime: 2021-08-30
 -->
 <template>
   <section class="dashboard">
     <el-container>
       <el-header>
         <div class="title">全国投标情况一览图</div>
+        <div class="date">
+          <span>投标日/落单日期: </span>
+          <el-date-picker
+            style="width: 220px"
+            v-model="selectTime"
+            type="daterange"
+            range-separator="~"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            size="mini"
+            value-format="yyyy-MM-dd"
+            :clearable="false"
+            @change="change"
+          ></el-date-picker>
+        </div>
       </el-header>
       <el-main>
         <el-row>
@@ -25,7 +40,7 @@
           </el-col>
           <el-col :span="12">
             <el-row v-loading="dataGeoLoading">
-              <total ref="total" :seriesData="dataGeo" @getTime="getTime" />
+              <total ref="total" :seriesData="dataGeo" />
             </el-row>
             <el-row v-loading="dataGeoLoading">
               <biddingGeo
@@ -117,11 +132,11 @@ export default {
       if (res && res.status == "1") {
         this.dataGeo = res.list;
         this.dataGeo.forEach((data) => {
-          data.name = data.name.replace("分公司", "");
+          data.name = data.name.replace("分公司", "").replace("总公司", "");
           if (data.zbnumb == 0) {
             data.zbl_f = 0;
           } else {
-            data.zbl_f = ((data.zhbnumb / data.zbnumb) * 100).toFixed(0) * 1;
+            data.zbl_f = ((data.zbnumb / data.zhbnumb) * 100).toFixed(0) * 1;
           }
         });
       }
@@ -132,7 +147,7 @@ export default {
         return b.zhbnumb - a.zhbnumb;
       });
     },
-    getTime(time) {
+    change(time) {
       this.selectTime = time
         ? time
         : [
@@ -160,17 +175,30 @@ export default {
 .el-header {
   display: flex;
   justify-content: center;
+  align-items: center;
+  position: relative;
 }
 .title {
-  width: 100%;
-  padding-top: 6px;
+  width: 1326px;
   font-size: 30px;
-  font-weight: 500;
+  font-weight: bold;
   color: #0f4c9a;
-  line-height: 42px;
+  line-height: 60px;
   background: url("../../assets/index/title.png") no-repeat 0 0;
   background-size: 100% 100%;
   text-align: center;
+}
+.date {
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 14px;
+    width: 120px;
+  }
+  position: absolute;
+  left: 50%;
+  margin-left: 274px;
+  top: 12px;
 }
 .el-main {
   padding-bottom: 0;

@@ -2,17 +2,17 @@
 * @Description: 中标数排行
 * @Date: 2021-08-18 
 * @Author: xuyin
-* @LastEditTime: 2021-08-18 
+* @LastEditTime: 2021-08-30
 -->
 <template>
   <section class="sort">
     <h3>中标数排行榜</h3>
     <el-row :gutter="40" type="flex" justify="space-around">
       <el-col>
-        <h4>TOP10</h4>
+        <h4>TOP 10</h4>
         <div class="top">
           <div v-for="(item, index) in topData" :key="item.id + index">
-            <h5>{{ item.name }}:</h5>
+            <h5>{{ item.name }}</h5>
             <div class="progressBox">
               <div class="progress">
                 <el-progress
@@ -28,10 +28,10 @@
         </div>
       </el-col>
       <el-col>
-        <h4>BACK10</h4>
+        <h4>BACK 10</h4>
         <div class="back">
           <div v-for="(item, index) in backData" :key="item.id + index">
-            <h5>{{ item.name }}:</h5>
+            <h5>{{ item.name }}</h5>
             <div class="progressBox">
               <div class="progress">
                 <el-progress

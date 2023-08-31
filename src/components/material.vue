@@ -2,7 +2,7 @@
 * @Description: 材料申请处理时效
 * @Date: 2021-08-23 
 * @Author: xuyin
-* @LastEditTime: 2021-08-23 
+* @LastEditTime: 2021-08-30 
 -->
 <template>
   <section class="material">
@@ -88,11 +88,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .material {
+  font-weight: bold !important;
   h3 {
     text-align: left;
     color: #262d61;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: bold;
     line-height: 29px;
   }
   ::v-deep .header {

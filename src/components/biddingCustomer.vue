@@ -2,7 +2,7 @@
 * @Description: 投标情况按客户
 * @Date: 2021-08-23 
 * @Author: xuyin
-* @LastEditTime: 2021-08-23 
+* @LastEditTime: 2021-08-30 
 -->
 <template>
   <section v-loading="customerLoading">
@@ -57,10 +57,12 @@ export default {
       if (res && res.status == "1") {
         const dataCustomer = res.list;
         this.option.xAxis[0].data = dataCustomer.map((data) => data.name);
-        this.option.series[0].data = dataCustomer.map((data) => data.zbnumb);
-        this.option.series[1].data = dataCustomer.map((data) => data.zhbnumb);
+        this.option.series[0].data = dataCustomer.map((data) => data.zhbnumb);
+        this.option.series[1].data = dataCustomer.map((data) => data.zbnumb);
         this.option.series[2].data = dataCustomer.map((data) =>
-          ((data.zhbnumb / data.zbnumb) * 100).toFixed(0)
+          data.zhbnumb == 0
+            ? 0
+            : ((data.zbnumb / data.zhbnumb) * 100).toFixed(0) * 1
         );
         this.initChart();
       }

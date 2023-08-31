@@ -55,7 +55,9 @@ export default {
       if (res && res.status == "1") {
         const dataKind = res.list.map((res) => ({
           name: res.name,
-          value: res.zhbnumb,
+          value: res.zbnumb,
+          zhbnumb: res.zhbnumb,
+          zbl: res.zbl,
         }));
         this.option.series[0].data = dataKind;
         this.initChart();
