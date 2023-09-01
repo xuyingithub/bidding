@@ -2,7 +2,7 @@
 * @Description: 材料申请处理时效
 * @Date: 2021-08-23 
 * @Author: xuyin
-* @LastEditTime: 2021-08-31
+* @LastEditTime: 2021-09-01
 -->
 <template>
   <section>
@@ -86,7 +86,6 @@ export default {
         },
         []
       );
-      console.log("this.zbl", this.zbl);
       return _seriesData.map((data) => {
         [data.subname, data.name] = [data.name, data.subname];
         return {
@@ -110,7 +109,9 @@ export default {
           value == 0 ? "#437EBD" : value < target ? "#449FFF" : "#79bdfe";
       }
       return {
-        itemStyle: { areaColor },
+        itemStyle: {
+          areaColor,
+        },
       };
     },
   },
