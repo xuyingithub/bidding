@@ -37,3 +37,12 @@ export function getBusiness(data) {
     data,
   });
 }
+
+// 获取商机投标数据
+export function getMaterial(data) {
+  return request({
+    url: apiVersions + "/Getjson_dpsx",
+    method: "post",
+    data,
+  });
+}

@@ -1,16 +1,16 @@
 <!--
 * @Description: 材料申请处理时效
-* @Date: 2021-08-23 
+* @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2021-08-30 
+* @LastEditTime: 2023-09-04 
 -->
 <template>
-  <section class="material">
+  <section class="material" v-loading="materialLoading">
     <h3>材料申请处理时效</h3>
     <el-table class="header" style="width: 100%; background: transparent">
-      <el-table-column label="分公司" min-width="120"></el-table-column>
-      <el-table-column label="管理员" min-width="80"></el-table-column>
-      <el-table-column label="处理时效" min-width="100"></el-table-column>
+      <el-table-column label="分公司" min-width="62"></el-table-column>
+      <el-table-column label="管理员" min-width="180"></el-table-column>
+      <el-table-column label="代办事项" min-width="76"></el-table-column>
     </el-table>
     <div class="materialBox">
       <vue-seamless-scroll :data="tableData" :class-option="defaultOption">
@@ -20,9 +20,9 @@
           style="width: 100%; background: transparent"
           cell-class-name="tableCell"
         >
-          <el-table-column prop="company" min-width="120"></el-table-column>
-          <el-table-column prop="name" min-width="80"></el-table-column>
-          <el-table-column prop="date" min-width="100"></el-table-column>
+          <el-table-column prop="name" min-width="62"></el-table-column>
+          <el-table-column prop="jsname" min-width="180"></el-table-column>
+          <el-table-column prop="num" min-width="76"></el-table-column>
         </el-table>
       </vue-seamless-scroll>
     </div>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { getMaterial } from "@/api";
 import VueSeamlessScroll from "vue-seamless-scroll";
 export default {
   name: "material",
@@ -70,18 +71,24 @@ export default {
         singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
         waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
       },
+      materialLoading: false,
     };
   },
   mounted() {
-    this.initData();
+    this.getMaterial();
   },
   methods: {
-    initData() {
-      this.tableData = [
-        ...this.tableData,
-        ...this.tableData,
-        ...this.tableData,
-      ];
+    async getMaterial() {
+      this.materialLoading = true;
+      const res = await getMaterial({});
+      this.materialLoading = false;
+      if (res && res.status == "1") {
+        this.tableData = res.list;
+        this.tableData.forEach((data) => {
+          data.name = data.name.replace("分公司", "").replace("总公司", "");
+          data.jsname = data.jsname.join(",");
+        });
+      }
     },
   },
 };

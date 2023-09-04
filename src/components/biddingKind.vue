@@ -1,8 +1,8 @@
 <!--
 * @Description: 投标情况按险种
-* @Date: 2021-08-23 
+* @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2021-08-23 
+* @LastEditTime: 2023-08-23 
 -->
 <template>
   <section v-loading="kindLoading">
