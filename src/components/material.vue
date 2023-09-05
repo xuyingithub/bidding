@@ -2,11 +2,11 @@
 * @Description: 材料申请处理时效
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-09-04 
+* @LastEditTime: 2023-09-05
 -->
 <template>
   <section class="material" v-loading="materialLoading">
-    <h3>材料申请处理时效</h3>
+    <h3>材料申请处理情况</h3>
     <el-table class="header" style="width: 100%; background: transparent">
       <el-table-column label="分公司" min-width="62"></el-table-column>
       <el-table-column label="管理员" min-width="180"></el-table-column>
