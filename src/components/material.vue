@@ -2,15 +2,15 @@
 * @Description: 材料申请处理时效
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-09-05
+* @LastEditTime: 2023-09-07
 -->
 <template>
   <section class="material" v-loading="materialLoading">
     <h3>材料申请处理情况</h3>
     <el-table class="header" style="width: 100%; background: transparent">
       <el-table-column label="分公司" min-width="62"></el-table-column>
-      <el-table-column label="管理员" min-width="180"></el-table-column>
-      <el-table-column label="代办事项" min-width="76"></el-table-column>
+      <el-table-column label="管理员" min-width="165"></el-table-column>
+      <el-table-column label="待办流程数量" min-width="104"></el-table-column>
     </el-table>
     <div class="materialBox">
       <vue-seamless-scroll :data="tableData" :class-option="defaultOption">
@@ -21,8 +21,8 @@
           cell-class-name="tableCell"
         >
           <el-table-column prop="name" min-width="62"></el-table-column>
-          <el-table-column prop="jsname" min-width="180"></el-table-column>
-          <el-table-column prop="num" min-width="76"></el-table-column>
+          <el-table-column prop="jsname" min-width="165"></el-table-column>
+          <el-table-column prop="num" min-width="104"></el-table-column>
         </el-table>
       </vue-seamless-scroll>
     </div>

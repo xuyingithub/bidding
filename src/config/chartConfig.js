@@ -12,6 +12,12 @@ const titleRich = {
   height: 15,
   borderRadius: 5,
 };
+export const geoColor = {
+  color_low: "#437EBD",
+  // color_middle: "#449FFF",
+  color_middle: "#83b7ee",
+  color_high: "#79bdfe",
+};
 export const chartCustomer_config = {
   title: {
     text: "招标情况-按客户",
@@ -151,7 +157,7 @@ export const chartKind_config = {
     trigger: "item",
     textStyle: font_family,
     formatter: function (a) {
-      return `${a.data.name}<br />招标数${a.data.zhbnumb}<br />中标数${a.data.value}<br />中标率${a.data.zbl}`;
+      return `${a.data.name}<br />招标数${a.data.zhbnumb}个<br />中标数${a.data.value}个<br />中标率${a.data.zbl}`;
     },
   },
   // legend: {
@@ -210,29 +216,26 @@ export const chartGeo_config = {
     showDelay: 100,
   },
   title: {
-    text: "{a|} 0 {b|} [0,平均中标率] {c|} >= 平均中标率",
+    text: "{a|} [0.0%]  {b|} (0,平均中标率%)  {c|} [平均中标率%,+∞)",
     textStyle: {
       fontSize: "12px",
       ...font_family,
       rich: {
         a: {
           ...titleRich,
-          backgroundColor: "#437EBD",
+          backgroundColor: geoColor.color_low,
         },
         b: {
           ...titleRich,
-          backgroundColor: "#449FFF",
+          backgroundColor: geoColor.color_middle,
         },
         c: {
           ...titleRich,
-          backgroundColor: "#79bdfe",
-        },
-        d: {
-          whiteSpace: "pre",
+          backgroundColor: geoColor.color_high,
         },
       },
     },
-    left: "left",
+    left: "12",
   },
   series: [
     {

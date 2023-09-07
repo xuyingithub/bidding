@@ -2,7 +2,7 @@
 * @Description: 看板总数统计
 * @Date: 2023-08-18
 * @Author: xuyin
-* @LastEditTime: 2023-08-30
+* @LastEditTime: 2023-09-07
 -->
 <template>
   <section class="total" v-if="seriesData.length > 0">
@@ -60,6 +60,7 @@
               :start-val="0"
               :end-val="zbl"
               :duration="duration"
+              :decimals="1"
               class="value"
             />
             <span class="percent">%</span>
@@ -98,7 +99,7 @@ export default {
       return this.seriesData.reduce((total, cur) => total + cur.zhbnumb, 0);
     },
     zbl() {
-      return ((this.zbnumb / this.zhbnumb) * 100).toFixed(0) * 1;
+      return ((this.zbnumb / this.zhbnumb) * 100).toFixed(1) * 1;
     },
   },
   methods: {

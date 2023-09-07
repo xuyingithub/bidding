@@ -2,7 +2,7 @@
 * @Description: 材料申请处理时效
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-09-01
+* @LastEditTime: 2023-09-07
 -->
 <template>
   <section>
@@ -12,7 +12,7 @@
 
 <script>
 import china from "@/assets/china.json";
-import { chartGeo_config as option } from "@/config/chartConfig";
+import { chartGeo_config as option, geoColor } from "@/config/chartConfig";
 export default {
   name: "biddingGeo",
   props: {
@@ -98,15 +98,19 @@ export default {
       let areaColor = "";
       if (Array.isArray(value)) {
         if (value.some((item) => item >= target)) {
-          areaColor = "#79bdfe";
+          areaColor = geoColor.color_high;
         } else if (value.some((item) => item < target)) {
-          areaColor = "#449FFF";
+          areaColor = geoColor.color_middle;
         } else if (value.some((item) => item == 0)) {
-          areaColor = "#437EBD";
+          areaColor = geoColor.color_low;
         }
       } else {
         areaColor =
-          value == 0 ? "#437EBD" : value < target ? "#449FFF" : "#79bdfe";
+          value == 0
+            ? geoColor.color_low
+            : value < target
+            ? geoColor.color_middle
+            : geoColor.color_high;
       }
       return {
         itemStyle: {
