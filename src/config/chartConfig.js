@@ -243,6 +243,7 @@ export class getGeoConfig {
           },
         },
         left: "12",
+        bottom: "15",
       },
       series: [
         {

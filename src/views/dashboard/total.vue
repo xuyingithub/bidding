@@ -126,10 +126,10 @@ export default {
     align-items: center;
     justify-content: space-around;
     color: #455070;
-    font-weight: 500;
+    font-weight: bold;
     .label {
       opacity: 0.8;
-      font-size: 14px;
+      font-size: 16px;
     }
     .zbl {
       display: flex;
@@ -138,7 +138,6 @@ export default {
     }
     .value {
       font-size: 26px;
-      font-weight: bold;
     }
     .percent {
       font-size: 22px;
