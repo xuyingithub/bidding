@@ -2,7 +2,7 @@
 * @Description: 中标数排行
 * @Date: 2023-08-18 
 * @Author: xuyin
-* @LastEditTime: 2023-08-30
+* @LastEditTime: 2023-09-08
 -->
 <template>
   <section class="sort">
@@ -91,6 +91,7 @@ export default {
 <style lang="scss" scoped>
 .sort {
   height: 260px;
+  padding-left: 4px;
   .top,
   .back {
     height: 186px;

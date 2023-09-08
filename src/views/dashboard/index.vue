@@ -211,6 +211,6 @@ export default {
   }
 }
 .el-main {
-  padding-bottom: 0;
+  padding: 10px 10px 0;
 }
 </style>

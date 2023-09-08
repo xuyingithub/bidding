@@ -23,7 +23,7 @@ export const chartCustomer_config = {
   title: {
     text: "招标情况-按客户",
     textStyle,
-    left: "left",
+    left: "0",
   },
   tooltip: {
     trigger: "axis",
@@ -42,7 +42,7 @@ export const chartCustomer_config = {
   },
   grid: {
     bottom: "15%",
-    right: "13%",
+    right: "42",
   },
   xAxis: [
     {
@@ -152,7 +152,7 @@ export const chartKind_config = {
   title: {
     text: "招标情况-按险种",
     textStyle,
-    left: "left",
+    left: "0",
   },
 
   tooltip: {
@@ -171,7 +171,7 @@ export const chartKind_config = {
       name: "招标情况-按险种",
       type: "pie",
       center: ["50%", "50%"], // 控制图表在画布中心的位置
-      radius: "50%",
+      radius: "60%",
       data: [],
       emphasis: {
         itemStyle: {
@@ -242,7 +242,7 @@ export class getGeoConfig {
             },
           },
         },
-        left: "12",
+        left: "8",
         bottom: "15",
       },
       series: [
@@ -297,7 +297,11 @@ export const chartCompany_config = {
   title: {
     text: "分公司投标情况",
     textStyle,
-    left: "left",
+    left: "10",
+  },
+  grid: {
+    left: "35",
+    right: "45",
   },
   tooltip: {
     trigger: "axis",
@@ -432,7 +436,7 @@ export const chartBusiness_config = {
   title: {
     text: "商机转化情况",
     textStyle,
-    left: "left",
+    left: "0",
   },
   tooltip: {
     trigger: "axis",
@@ -450,7 +454,8 @@ export const chartBusiness_config = {
     textStyle: font_family,
   },
   grid: {
-    right: "13%",
+    left: "27",
+    right: "42",
   },
   dataZoom: [
     {

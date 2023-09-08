@@ -81,6 +81,7 @@ export default {
     font-size: 16px;
     font-weight: bold;
     line-height: 29px;
+    padding-left: 8px;
   }
   ::v-deep .header {
     .el-table__body-wrapper {
