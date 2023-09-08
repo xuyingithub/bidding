@@ -21,7 +21,7 @@ export const geoColor = {
 };
 export const chartCustomer_config = {
   title: {
-    text: "招标情况-按客户",
+    text: "投标情况-按客户",
     textStyle,
     left: "0",
   },
@@ -150,7 +150,7 @@ export const chartCustomer_config = {
 };
 export const chartKind_config = {
   title: {
-    text: "招标情况-按险种",
+    text: "投标情况-按险种",
     textStyle,
     left: "0",
   },
@@ -159,7 +159,7 @@ export const chartKind_config = {
     trigger: "item",
     textStyle: font_family,
     formatter: function (a) {
-      return `${a.data.name}<br />招标数${a.data.zhbnumb}个<br />中标数${a.data.value}个<br />中标率${a.data.zbl}`;
+      return `${a.data.name}<br />投标数${a.data.zhbnumb}个<br />中标数${a.data.value}个<br />中标率${a.data.zbl}`;
     },
   },
   // legend: {
@@ -168,7 +168,7 @@ export const chartKind_config = {
   // },
   series: [
     {
-      name: "招标情况-按险种",
+      name: "投标情况-按险种",
       type: "pie",
       center: ["50%", "50%"], // 控制图表在画布中心的位置
       radius: "60%",
