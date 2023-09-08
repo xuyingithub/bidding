@@ -2,7 +2,7 @@
 * @Description: 材料申请处理时效
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-09-07
+* @LastEditTime: 2023-09-08
 -->
 <template>
   <section class="material" v-loading="materialLoading">
@@ -39,28 +39,7 @@ export default {
   },
   data() {
     return {
-      tableData: [
-        {
-          company: "**分公司",
-          name: "王小虎",
-          date: "2016-05-04",
-        },
-        {
-          company: "**分公司",
-          name: "王小虎",
-          date: "2016-05-04",
-        },
-        {
-          company: "**分公司",
-          name: "王小虎",
-          date: "2016-05-04",
-        },
-        {
-          company: "**分公司",
-          name: "王小虎",
-          date: "2016-05-04",
-        },
-      ],
+      tableData: [],
       defaultOption: {
         step: 0.5, // 数值越大速度滚动越快
         limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length

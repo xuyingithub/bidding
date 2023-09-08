@@ -2,7 +2,7 @@
 * @Description: dashboard
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-08-30
+* @LastEditTime: 2023-09-08
 -->
 <template>
   <section class="dashboard">
@@ -21,6 +21,7 @@
             size="mini"
             value-format="yyyy-MM-dd"
             :clearable="false"
+            :unlink-panels="true"
             @change="change"
           ></el-date-picker>
         </div>
@@ -191,6 +192,7 @@ export default {
 .date {
   display: flex;
   align-items: center;
+  font-weight: bold;
   span {
     font-size: 14px;
     width: 120px;
@@ -199,6 +201,14 @@ export default {
   left: 50%;
   margin-left: 274px;
   top: 12px;
+  ::v-deep .el-date-editor {
+    .el-range__close-icon {
+      width: 10px;
+    }
+    .el-range-input {
+      font-weight: bold;
+    }
+  }
 }
 .el-main {
   padding-bottom: 0;

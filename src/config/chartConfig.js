@@ -1,5 +1,6 @@
 const font_family = {
   fontFamily: "PingFang SC, PingFang SC-Medium",
+  fontWeight: "bold",
 };
 const textStyle = {
   color: "#262d61",
@@ -15,7 +16,7 @@ const titleRich = {
 export const geoColor = {
   color_low: "#437EBD",
   // color_middle: "#449FFF",
-  color_middle: "#83b7ee",
+  color_middle: "#5095DC",
   color_high: "#79bdfe",
 };
 export const chartCustomer_config = {
@@ -32,6 +33,7 @@ export const chartCustomer_config = {
         color: "#999",
       },
     },
+    textStyle: font_family,
   },
   legend: {
     data: ["投标数", "中标数", "中标率"],
@@ -181,108 +183,115 @@ export const chartKind_config = {
     },
   ],
 };
-export const chartGeo_config = {
-  // 背景颜色
-  backgroundColor: "transparent",
-  // // 提示浮窗样式
-  tooltip: {
-    show: true,
-    trigger: "item",
-    alwaysShowContent: false,
-    backgroundColor: "#0C121C",
-    borderColor: "rgba(0, 0, 0, 0.16);",
-    hideDelay: 100,
-    triggerOn: "mousemove",
-    enterable: true,
-    textStyle: {
-      color: "#DADADA",
-      fontSize: "12",
-      width: 20,
-      height: 30,
-      overflow: "break",
-    },
-    formatter: function (a) {
-      if (Array.isArray(a.data.subname)) {
-        const dataArr = a.data.subname.map((item, index) => {
-          return `${item}<br />投标数${a.data.zhbnumb[index]}个<br />中标数${a.data.zbnumb[index]}个<br />中标率${a.data.zbl[index]}`;
-        });
-        return dataArr.reduce((total, cur) => {
-          return total + cur + "<br />";
-        }, "");
-      } else {
-        return `${a.data.subname}<br />投标数${a.data.zhbnumb}个<br />中标数${a.data.zbnumb}个<br />中标率${a.data.zbl}`;
-      }
-    },
-    showDelay: 100,
-  },
-  title: {
-    text: "{a|} [0.0%]  {b|} (0,平均中标率%)  {c|} [平均中标率%,+∞)",
-    textStyle: {
-      fontSize: "12px",
-      ...font_family,
-      rich: {
-        a: {
-          ...titleRich,
-          backgroundColor: geoColor.color_low,
+export class getGeoConfig {
+  constructor(props) {
+    this.average = props;
+  }
+  getConfig() {
+    return {
+      // 背景颜色
+      backgroundColor: "transparent",
+      // // 提示浮窗样式
+      tooltip: {
+        show: true,
+        trigger: "item",
+        alwaysShowContent: false,
+        backgroundColor: "#0C121C",
+        borderColor: "rgba(0, 0, 0, 0.16);",
+        hideDelay: 100,
+        triggerOn: "mousemove",
+        enterable: true,
+        textStyle: {
+          color: "#DADADA",
+          fontSize: "12",
+          width: 20,
+          height: 30,
+          overflow: "break",
         },
-        b: {
-          ...titleRich,
-          backgroundColor: geoColor.color_middle,
+        formatter: function (a) {
+          if (Array.isArray(a.data.subname)) {
+            const dataArr = a.data.subname.map((item, index) => {
+              return `${item}<br />投标数${a.data.zhbnumb[index]}个<br />中标数${a.data.zbnumb[index]}个<br />中标率${a.data.zbl[index]}`;
+            });
+            return dataArr.reduce((total, cur) => {
+              return total + cur + "<br />";
+            }, "");
+          } else {
+            return `${a.data.subname}<br />投标数${a.data.zhbnumb}个<br />中标数${a.data.zbnumb}个<br />中标率${a.data.zbl}`;
+          }
         },
-        c: {
-          ...titleRich,
-          backgroundColor: geoColor.color_high,
-        },
+        showDelay: 100,
       },
-    },
-    left: "12",
-  },
-  series: [
-    {
-      type: "map",
-      map: "china",
-      label: {
-        // 通常状态下的样式
-        normal: {
-          // show: true,
-          // textStyle: {
-          // color: "#fff",
-          // },
-        },
-        // 鼠标放上去的样式
-        emphasis: {
-          textStyle: {
-            color: "#262D61",
+      title: {
+        text: `{a|} [0%]  {b|} (0,${this.average}%)  {c|} [${this.average}%,100%)`,
+        textStyle: {
+          fontSize: "12px",
+          ...font_family,
+          rich: {
+            a: {
+              ...titleRich,
+              backgroundColor: geoColor.color_low,
+            },
+            b: {
+              ...titleRich,
+              backgroundColor: geoColor.color_middle,
+            },
+            c: {
+              ...titleRich,
+              backgroundColor: geoColor.color_high,
+            },
           },
         },
+        left: "12",
       },
-      // 地图区域的样式设置
-      itemStyle: {
-        normal: {
-          borderColor: "#fff",
-          borderWidth: 1,
-          areaColor: "#79bdfe",
-          shadowColor: "rgba(47,86,127,0.23)",
-          shadowOffsetX: -2,
-          shadowOffsetY: 2,
-          shadowBlur: 10,
+      series: [
+        {
+          type: "map",
+          map: "china",
+          label: {
+            // 通常状态下的样式
+            normal: {
+              // show: true,
+              // textStyle: {
+              // color: "#fff",
+              // },
+            },
+            // 鼠标放上去的样式
+            emphasis: {
+              textStyle: {
+                color: "#262D61",
+              },
+            },
+          },
+          // 地图区域的样式设置
+          itemStyle: {
+            normal: {
+              borderColor: "#fff",
+              borderWidth: 1,
+              areaColor: "#79bdfe",
+              shadowColor: "rgba(47,86,127,0.23)",
+              shadowOffsetX: -2,
+              shadowOffsetY: 2,
+              shadowBlur: 10,
+            },
+            // 鼠标放上去高亮的样式
+            emphasis: {
+              areaColor: "#389BB7",
+              borderWidth: 0,
+            },
+          },
+          select: {
+            disabled: true,
+          },
+          layoutCenter: ["50%", "50%"],
+          layoutSize: "120%",
+          aspectScale: 0.75,
+          data: [],
         },
-        // 鼠标放上去高亮的样式
-        emphasis: {
-          areaColor: "#389BB7",
-          borderWidth: 0,
-        },
-      },
-      select: {
-        disabled: true,
-      },
-      layoutCenter: ["50%", "50%"],
-      layoutSize: "120%",
-      aspectScale: 0.75,
-      data: [],
-    },
-  ],
-};
+      ],
+    };
+  }
+}
 export const chartCompany_config = {
   title: {
     text: "分公司投标情况",
@@ -291,6 +300,7 @@ export const chartCompany_config = {
   },
   tooltip: {
     trigger: "axis",
+    textStyle: font_family,
     axisPointer: {
       type: "cross",
       crossStyle: {
@@ -425,6 +435,7 @@ export const chartBusiness_config = {
   },
   tooltip: {
     trigger: "axis",
+    textStyle: font_family,
     axisPointer: {
       type: "cross",
       crossStyle: {

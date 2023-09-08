@@ -2,7 +2,7 @@
 * @Description: 材料申请处理时效
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-09-07
+* @LastEditTime: 2023-09-08
 -->
 <template>
   <section>
@@ -12,7 +12,7 @@
 
 <script>
 import china from "@/assets/china.json";
-import { chartGeo_config as option, geoColor } from "@/config/chartConfig";
+import { geoColor, getGeoConfig } from "@/config/chartConfig";
 export default {
   name: "biddingGeo",
   props: {
@@ -25,7 +25,6 @@ export default {
   },
   data() {
     return {
-      option,
       myChart: "",
     };
   },
@@ -37,7 +36,10 @@ export default {
       return this.seriesData.reduce((total, cur) => total + cur.zhbnumb, 0);
     },
     zbl() {
-      return ((this.zbnumb / this.zhbnumb) * 100).toFixed(0) * 1;
+      return ((this.zbnumb / this.zhbnumb) * 100).toFixed(1) * 1;
+    },
+    option() {
+      return new getGeoConfig(this.zbl).getConfig();
     },
   },
   watch: {

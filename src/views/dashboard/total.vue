@@ -2,7 +2,7 @@
 * @Description: 看板总数统计
 * @Date: 2023-08-18
 * @Author: xuyin
-* @LastEditTime: 2023-09-07
+* @LastEditTime: 2023-09-08
 -->
 <template>
   <section class="total" v-if="seriesData.length > 0">
@@ -138,6 +138,7 @@ export default {
     }
     .value {
       font-size: 26px;
+      font-weight: bold;
     }
     .percent {
       font-size: 22px;
