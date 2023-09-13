@@ -2,7 +2,7 @@
 * @Description: 投标情况按险种
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-08-23 
+* @LastEditTime: 2023-09-13 
 -->
 <template>
   <section v-loading="kindLoading">
@@ -57,7 +57,7 @@ export default {
           name: res.name,
           value: res.zbnumb,
           zhbnumb: res.zhbnumb,
-          zbl: res.zbl,
+          zbl: ((res.zbnumb / res.zhbnumb) * 100).toFixed(1) + "%",
         }));
         this.option.series[0].data = dataKind;
         this.initChart();

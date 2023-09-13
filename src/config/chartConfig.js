@@ -33,7 +33,7 @@ export const chartCustomer_config = {
         color: "#999",
       },
     },
-    textStyle: font_family,
+    textStyle: { ...font_family, align: "left" },
   },
   legend: {
     data: ["投标数", "中标数", "中标率"],
@@ -157,7 +157,7 @@ export const chartKind_config = {
 
   tooltip: {
     trigger: "item",
-    textStyle: font_family,
+    textStyle: { ...font_family, align: "left" },
     formatter: function (a) {
       return `${a.data.name}<br />投标数${a.data.zhbnumb}个<br />中标数${a.data.value}个<br />中标率${a.data.zbl}`;
     },
@@ -207,23 +207,24 @@ export class getGeoConfig {
           width: 20,
           height: 30,
           overflow: "break",
+          align: "left",
         },
         formatter: function (a) {
           if (Array.isArray(a.data.subname)) {
             const dataArr = a.data.subname.map((item, index) => {
-              return `${item}<br />投标数${a.data.zhbnumb[index]}个<br />中标数${a.data.zbnumb[index]}个<br />中标率${a.data.zbl[index]}`;
+              return `${item}<br />投标数${a.data.zhbnumb[index]}个<br />中标数${a.data.zbnumb[index]}个<br />中标率${a.data.zbl_f[index]}%`;
             });
             return dataArr.reduce((total, cur) => {
               return total + cur + "<br />";
             }, "");
           } else {
-            return `${a.data.subname}<br />投标数${a.data.zhbnumb}个<br />中标数${a.data.zbnumb}个<br />中标率${a.data.zbl}`;
+            return `${a.data.subname}<br />投标数${a.data.zhbnumb}个<br />中标数${a.data.zbnumb}个<br />中标率${a.data.zbl_f}%`;
           }
         },
         showDelay: 100,
       },
       title: {
-        text: `{a|} [0%]  {b|} (0,${this.average}%)  {c|} [${this.average}%,100%)`,
+        text: `{a|} [0.0%]  {b|} (0,${this.average}%)  {c|} [${this.average}%,100.0%]`,
         textStyle: {
           fontSize: "12px",
           ...font_family,
@@ -305,7 +306,7 @@ export const chartCompany_config = {
   },
   tooltip: {
     trigger: "axis",
-    textStyle: font_family,
+    textStyle: { ...font_family, align: "left" },
     axisPointer: {
       type: "cross",
       crossStyle: {
@@ -440,7 +441,7 @@ export const chartBusiness_config = {
   },
   tooltip: {
     trigger: "axis",
-    textStyle: font_family,
+    textStyle: { ...font_family, align: "left" },
     axisPointer: {
       type: "cross",
       crossStyle: {

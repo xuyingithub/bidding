@@ -2,7 +2,7 @@
 * @Description: 材料申请处理时效
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-09-08
+* @LastEditTime: 2023-09-13
 -->
 <template>
   <section class="material" v-loading="materialLoading">
@@ -22,7 +22,11 @@
         >
           <el-table-column prop="name" min-width="62"></el-table-column>
           <el-table-column prop="jsname" min-width="165"></el-table-column>
-          <el-table-column prop="num" min-width="104"></el-table-column>
+          <el-table-column
+            prop="num"
+            min-width="104"
+            :formatter="formatterNum"
+          ></el-table-column>
         </el-table>
       </vue-seamless-scroll>
     </div>
@@ -66,8 +70,15 @@ export default {
         this.tableData.forEach((data) => {
           data.name = data.name.replace("分公司", "").replace("总公司", "");
           data.jsname = data.jsname.join(",");
+          data.num == "-" && (data.num = 0);
+        });
+        this.tableData = this.tableData.sort((a, b) => {
+          return b.num - a.num;
         });
       }
+    },
+    formatterNum(row, column, cellValue) {
+      return cellValue > 0 ? cellValue : "-";
     },
   },
 };

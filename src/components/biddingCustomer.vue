@@ -2,7 +2,7 @@
 * @Description: 投标情况按客户
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-08-30 
+* @LastEditTime: 2023-09-13 
 -->
 <template>
   <section v-loading="customerLoading">
@@ -62,7 +62,7 @@ export default {
         this.option.series[2].data = dataCustomer.map((data) =>
           data.zhbnumb == 0
             ? 0
-            : ((data.zbnumb / data.zhbnumb) * 100).toFixed(0) * 1
+            : ((data.zbnumb / data.zhbnumb) * 100).toFixed(1)
         );
         this.initChart();
       }

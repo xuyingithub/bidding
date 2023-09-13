@@ -2,7 +2,7 @@
 * @Description: dashboard
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-09-08
+* @LastEditTime: 2023-09-13
 -->
 <template>
   <section class="dashboard">
@@ -135,9 +135,9 @@ export default {
         this.dataGeo.forEach((data) => {
           data.name = data.name.replace("分公司", "").replace("总公司", "");
           if (data.zbnumb == 0) {
-            data.zbl_f = 0;
+            data.zbl_f = "0.0";
           } else {
-            data.zbl_f = ((data.zbnumb / data.zhbnumb) * 100).toFixed(0) * 1;
+            data.zbl_f = ((data.zbnumb / data.zhbnumb) * 100).toFixed(1);
           }
         });
       }

@@ -2,7 +2,7 @@
 * @Description: 商机转化情况
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-08-30 
+* @LastEditTime: 2023-09-13 
 -->
 <template>
   <section class="business" v-loading="businessLoading">
@@ -62,7 +62,7 @@ export default {
         this.option.series[0].data = dataBusiness.map((data) => data.sjs);
         this.option.series[1].data = dataBusiness.map((data) => data.lxs);
         this.option.series[2].data = dataBusiness.map((data) =>
-          data.sjs == 0 ? 0 : ((data.lxs / data.sjs) * 100).toFixed(0) * 1
+          data.sjs == 0 ? "0.0" : ((data.lxs / data.sjs) * 100).toFixed(1)
         );
         this.initChart();
       }
