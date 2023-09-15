@@ -450,7 +450,7 @@ export const chartBusiness_config = {
     },
   },
   legend: {
-    data: ["商机数", "立项数", "商机转化率"],
+    data: ["商机数(来自商机库)", "立项数", "商机转化率"],
     top: "30",
     textStyle: font_family,
   },
@@ -499,7 +499,7 @@ export const chartBusiness_config = {
   ],
   series: [
     {
-      name: "商机数",
+      name: "商机数(来自商机库)",
       type: "bar",
       tooltip: {
         valueFormatter: function (value) {
