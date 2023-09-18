@@ -2,7 +2,7 @@
 * @Description: 看板总数统计
 * @Date: 2023-08-18
 * @Author: xuyin
-* @LastEditTime: 2023-09-08
+* @LastEditTime: 2023-09-18
 -->
 <template>
   <section class="total" v-if="seriesData.length > 0">
@@ -99,7 +99,9 @@ export default {
       return this.seriesData.reduce((total, cur) => total + cur.zhbnumb, 0);
     },
     zbl() {
-      return ((this.zbnumb / this.zhbnumb) * 100).toFixed(1) * 1;
+      return this.zhbnumb === 0
+        ? 0
+        : ((this.zbnumb / this.zhbnumb) * 100).toFixed(1) * 1;
     },
   },
   methods: {

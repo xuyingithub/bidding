@@ -36,7 +36,9 @@ export default {
       return this.seriesData.reduce((total, cur) => total + cur.zhbnumb, 0);
     },
     zbl() {
-      return ((this.zbnumb / this.zhbnumb) * 100).toFixed(1) * 1;
+      return this.zhbnumb === 0
+        ? 0
+        : ((this.zbnumb / this.zhbnumb) * 100).toFixed(1) * 1;
     },
     option() {
       return new getGeoConfig(this.zbl).getConfig();
