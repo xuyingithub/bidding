@@ -15,7 +15,6 @@ const titleRich = {
 };
 export const geoColor = {
   color_low: "#437EBD",
-  // color_middle: "#449FFF",
   color_middle: "#5095DC",
   color_high: "#79bdfe",
 };
@@ -270,7 +269,7 @@ export class getGeoConfig {
             normal: {
               borderColor: "#fff",
               borderWidth: 1,
-              areaColor: "#79bdfe",
+              areaColor: geoColor.color_low,
               shadowColor: "rgba(47,86,127,0.23)",
               shadowOffsetX: -2,
               shadowOffsetY: 2,
@@ -450,7 +449,7 @@ export const chartBusiness_config = {
     },
   },
   legend: {
-    data: ["商机数(来自商机库)", "立项数", "商机转化率"],
+    data: ["商机数(来自商机库)", "投标数", "商机转化率"],
     top: "30",
     textStyle: font_family,
   },
@@ -509,7 +508,7 @@ export const chartBusiness_config = {
       data: [],
     },
     {
-      name: "立项数",
+      name: "投标数",
       type: "bar",
       tooltip: {
         valueFormatter: function (value) {

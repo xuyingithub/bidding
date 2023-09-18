@@ -2,7 +2,7 @@
 * @Description: 中标数排行
 * @Date: 2023-08-18 
 * @Author: xuyin
-* @LastEditTime: 2023-09-08
+* @LastEditTime: 2023-09-18
 -->
 <template>
   <section class="sort">
@@ -18,11 +18,10 @@
                 <el-progress
                   :percentage="item.top"
                   :stroke-width="8"
-                  zhbnumb
                   :show-text="false"
                 ></el-progress>
               </div>
-              <span>{{ item.zhbnumb }}</span>
+              <span>{{ item.zbnumb }}</span>
             </div>
           </div>
         </div>
@@ -37,12 +36,11 @@
                 <el-progress
                   :percentage="item.back"
                   :stroke-width="8"
-                  zhbnumb
                   :show-text="false"
                   status="exception"
                 ></el-progress>
               </div>
-              <span>{{ item.zhbnumb }}</span>
+              <span>{{ item.zbnumb }}</span>
             </div>
           </div>
         </div>
@@ -67,9 +65,9 @@ export default {
       const _seriesData = this.seriesData.slice(0, 10);
       _seriesData.forEach((element) => {
         element.top =
-          _seriesData[0].zhbnumb == 0
+          _seriesData[0].zbnumb == 0
             ? 0
-            : ((element.zhbnumb / _seriesData[0].zhbnumb) * 100).toFixed(0) * 1;
+            : ((element.zbnumb / _seriesData[0].zbnumb) * 100).toFixed(0) * 1;
       });
       return _seriesData;
     },
@@ -77,9 +75,9 @@ export default {
       const _seriesData = this.seriesData.slice().reverse().slice(0, 10);
       _seriesData.forEach((element) => {
         element.back =
-          _seriesData[0].zhbnumb == 0
+          _seriesData[0].zbnumb == 0
             ? 0
-            : ((1 / (element.zhbnumb / _seriesData[0].zhbnumb)) * 100).toFixed(
+            : ((1 / (element.zbnumb / _seriesData[0].zbnumb)) * 100).toFixed(
                 0
               ) * 1;
       });
