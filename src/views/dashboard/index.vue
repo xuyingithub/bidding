@@ -2,7 +2,7 @@
 * @Description: dashboard
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-09-13
+* @LastEditTime: 2023-09-19
 -->
 <template>
   <section class="dashboard">
@@ -145,7 +145,7 @@ export default {
     dataSort(data) {
       const _data = JSON.parse(JSON.stringify(data));
       return _data.sort((a, b) => {
-        return b.zhbnumb - a.zhbnumb;
+        return b.zbnumb - a.zbnumb;
       });
     },
     change(time) {
