@@ -2,7 +2,7 @@
 * @Description: 商机转化情况
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-09-14                                                                                         
+* @LastEditTime: 2023-09-19                                                                                         
 -->
 <template>
   <section class="business" v-loading="businessLoading">
@@ -55,7 +55,11 @@ export default {
       });
       this.businessLoading = false;
       if (res && res.status == "1") {
-        const dataBusiness = res.list;
+        const dataBusiness = res.list.sort((a, b) => {
+          return a.name.localeCompare(b.name, "zh-Hans-CN-u-co-pinyin", {
+            sensitivity: "accent",
+          });
+        });
         this.option.xAxis[0].data = dataBusiness.map((data) =>
           data.name.replace("分公司", "").replace("总公司", "")
         );
