@@ -10,7 +10,7 @@
       <el-header>
         <div class="title">全国投标情况一览图</div>
         <div class="date">
-          <span>投标日/落单日期: </span>
+          <span>投标日/落单日期:</span>
           <el-date-picker
             style="width: 220px"
             v-model="selectTime"
@@ -55,7 +55,10 @@
               />
             </el-row>
             <el-row v-loading="dataGeoLoading">
-              <biddingCompany ref="biddingCompany" :seriesData="dataGeo" />
+              <biddingCompany
+                ref="biddingCompany"
+                :seriesData="dataLocaleCompare(dataGeo)"
+              />
             </el-row>
           </el-col>
           <el-col :span="6">
@@ -134,7 +137,7 @@ export default {
         this.dataGeo = res.list;
         this.dataGeo.forEach((data) => {
           data.name = data.name.replace("分公司", "").replace("总公司", "");
-          if (data.zbnumb == 0) {
+          if (data.zhbnumb == 0) {
             data.zbl_f = "0.0";
           } else {
             data.zbl_f = ((data.zbnumb / data.zhbnumb) * 100).toFixed(1);
@@ -146,6 +149,14 @@ export default {
       const _data = JSON.parse(JSON.stringify(data));
       return _data.sort((a, b) => {
         return b.zbnumb - a.zbnumb;
+      });
+    },
+    dataLocaleCompare(data) {
+      const _data = JSON.parse(JSON.stringify(data));
+      return _data.sort((a, b) => {
+        return a.name.localeCompare(b.name, "zh-Hans-CN-u-co-pinyin", {
+          sensitivity: "accent",
+        });
       });
     },
     change(time) {

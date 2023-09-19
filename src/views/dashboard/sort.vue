@@ -2,7 +2,7 @@
 * @Description: 中标数排行
 * @Date: 2023-08-18 
 * @Author: xuyin
-* @LastEditTime: 2023-09-18
+* @LastEditTime: 2023-09-19
 -->
 <template>
   <section class="sort">
@@ -76,7 +76,9 @@ export default {
       _seriesData.forEach((element) => {
         element.back =
           _seriesData[0].zbnumb == 0
-            ? 0
+            ? element.zbnumb == 0
+              ? 100
+              : ((1 / (element.zbnumb / 1)) * 100).toFixed(0) * 1
             : ((1 / (element.zbnumb / _seriesData[0].zbnumb)) * 100).toFixed(
                 0
               ) * 1;
