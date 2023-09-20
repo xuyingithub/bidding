@@ -13,6 +13,7 @@ import {
   DatePicker,
   Progress,
   Loading,
+  Button,
 } from "element-ui";
 import animate from "animate.css";
 
@@ -25,6 +26,7 @@ Vue.use(Container)
   .use(DatePicker)
   .use(Progress)
   .use(TableColumn)
+  .use(Button)
   .use(Loading)
   .use(animate);
 // 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。
