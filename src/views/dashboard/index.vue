@@ -2,28 +2,15 @@
 * @Description: dashboard
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-09-20
+* @LastEditTime: 2023-09-21
 -->
 <template>
   <section class="dashboard">
     <el-container>
       <el-header>
-        <div class="action">
-          <el-button
-            size="mini"
-            type="primary"
-            icon="el-icon-full-screen"
-            circle
-            @click="fullscreen"
-          />
-          <el-button
-            size="mini"
-            type="primary"
-            icon="el-icon-close"
-            circle
-            @click="goTo"
-          />
-        </div>
+        <el-button class="goTo" type="primary" plain @click="goTo"
+          >进入首页</el-button
+        >
         <div class="title">
           <div
             class="animate__animated animate__flipInX animate__delay-3s animate__slower"
@@ -198,34 +185,8 @@ export default {
       this.$refs.biddingCompany && this.$refs.biddingCompany.myChart.resize();
       this.$refs.biddingBusiness && this.$refs.biddingBusiness.myChart.resize();
     },
-    fullscreen() {
-      const elem = document.documentElement;
-      if (!document.fullscreenElement) {
-        // 进入全屏模式
-        if (elem.requestFullscreen) {
-          elem.requestFullscreen();
-        } else if (elem.mozRequestFullScreen) {
-          elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullscreen) {
-          elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) {
-          elem.msRequestFullscreen();
-        }
-      } else {
-        // 退出全屏模式
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        }
-      }
-    },
     goTo() {
-      window.location.href = "http://10.3.0.20:8080/emp/work/wui/index.html";
+      window.location.href = "/emp/work/wui/index.html";
     },
   },
 };
@@ -253,6 +214,11 @@ export default {
   background: url("../../assets/index/title.png") no-repeat 0 0;
   background-size: 100% 100%;
   text-align: center;
+}
+.goTo {
+  position: absolute;
+  left: 14px;
+  top: 4px;
 }
 .date {
   display: flex;
