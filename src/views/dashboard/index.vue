@@ -8,7 +8,13 @@
   <section class="dashboard">
     <el-container>
       <el-header>
-        <el-button class="goTo" type="primary" plain @click="goTo"
+        <el-button
+          class="goTo"
+          type="primary"
+          plain
+          size="medium"
+          round
+          @click="goTo"
           >进入首页</el-button
         >
         <div class="title">
@@ -202,9 +208,6 @@ export default {
   align-items: center;
   position: relative;
 }
-.action {
-  display: flex;
-}
 .title {
   width: 1326px;
   font-size: 30px;
@@ -218,12 +221,14 @@ export default {
 .goTo {
   position: absolute;
   left: 14px;
-  top: 4px;
+  top: 8px;
+  z-index: 100;
 }
 .date {
   display: flex;
   align-items: center;
   font-weight: bold;
+  color: #262d61;
   span {
     font-size: 14px;
     width: 120px;
