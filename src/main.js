@@ -14,6 +14,8 @@ import {
   Progress,
   Loading,
   Button,
+  RadioGroup,
+  RadioButton,
 } from "element-ui";
 import animate from "animate.css";
 
@@ -27,6 +29,8 @@ Vue.use(Container)
   .use(Progress)
   .use(TableColumn)
   .use(Button)
+  .use(RadioButton)
+  .use(RadioGroup)
   .use(Loading)
   .use(animate);
 // 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。

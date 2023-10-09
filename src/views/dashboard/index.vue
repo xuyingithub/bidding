@@ -2,7 +2,7 @@
 * @Description: dashboard
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-09-21
+* @LastEditTime: 2023-10-09
 -->
 <template>
   <section class="dashboard">
@@ -45,7 +45,7 @@
         <el-row>
           <el-col :span="6">
             <el-row v-loading="dataGeoLoading">
-              <sort :seriesData="dataSort(dataGeo)" />
+              <sort :seriesData="dataSortzb(dataGeo)" />
             </el-row>
             <el-row>
               <biddingCustomer ref="biddingCustomer" :selectTime="selectTime" />
@@ -70,9 +70,20 @@
               />
             </el-row>
             <el-row v-loading="dataGeoLoading">
+              <div class="sortType">
+                <span>排序 : </span>
+                <el-radio-group v-model="dataGeoType" size="mini">
+                  <el-radio-button label="dataLocaleCompare"
+                    >默认</el-radio-button
+                  >
+                  <el-radio-button label="dataSortzhb">投标数</el-radio-button>
+                  <el-radio-button label="dataSortzb">中标数</el-radio-button>
+                  <el-radio-button label="dataSortzhl">中标率</el-radio-button>
+                </el-radio-group>
+              </div>
               <biddingCompany
                 ref="biddingCompany"
-                :seriesData="dataLocaleCompare(dataGeo)"
+                :seriesData="formatterData(dataGeo)"
               />
             </el-row>
           </el-col>
@@ -119,6 +130,7 @@ export default {
       selectTime: [],
       dataGeoLoading: false,
       dateObj: "",
+      dataGeoType: "dataLocaleCompare", // 分公司投标情况排序
     };
   },
   mounted() {
@@ -154,16 +166,30 @@ export default {
           data.name = data.name.replace("分公司", "").replace("总公司", "");
           if (data.zhbnumb == 0) {
             data.zbl_f = "0.0";
+            data.zbl_v = 0;
           } else {
             data.zbl_f = ((data.zbnumb / data.zhbnumb) * 100).toFixed(1);
+            data.zbl_v = data.zbnumb / data.zhbnumb;
           }
         });
       }
     },
-    dataSort(data) {
+    dataSortzb(data) {
       const _data = JSON.parse(JSON.stringify(data));
       return _data.sort((a, b) => {
         return b.zbnumb - a.zbnumb;
+      });
+    },
+    dataSortzhb(data) {
+      const _data = JSON.parse(JSON.stringify(data));
+      return _data.sort((a, b) => {
+        return b.zhbnumb - a.zhbnumb;
+      });
+    },
+    dataSortzhl(data) {
+      const _data = JSON.parse(JSON.stringify(data));
+      return _data.sort((a, b) => {
+        return b.zbl_v - a.zbl_v;
       });
     },
     dataLocaleCompare(data) {
@@ -173,6 +199,9 @@ export default {
           sensitivity: "accent",
         });
       });
+    },
+    formatterData(data) {
+      return this[this.dataGeoType](data);
     },
     change(time) {
       this.selectTime = time
@@ -248,5 +277,14 @@ export default {
 }
 .el-main {
   padding: 10px 10px 0;
+  .sortType {
+    position: absolute;
+    right: 40px;
+    top: 5px;
+    z-index: 1000;
+    span {
+      font-size: 12px;
+    }
+  }
 }
 </style>
