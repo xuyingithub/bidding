@@ -2,7 +2,7 @@
 * @Description: dashboard
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-10-09
+* @LastEditTime: 2023-10-16
 -->
 <template>
   <section class="dashboard">
@@ -71,14 +71,24 @@
             </el-row>
             <el-row v-loading="dataGeoLoading">
               <div class="sortType">
-                <span>排序 : </span>
-                <el-radio-group v-model="dataGeoType" size="mini">
-                  <el-radio-button label="dataLocaleCompare"
-                    >默认</el-radio-button
-                  >
-                  <el-radio-button label="dataSortzhb">投标数</el-radio-button>
-                  <el-radio-button label="dataSortzb">中标数</el-radio-button>
-                  <el-radio-button label="dataSortzhl">中标率</el-radio-button>
+                <el-select
+                  v-model="dataGeoType"
+                  placeholder="请选择"
+                  size="mini"
+                >
+                  <el-option value="dataLocaleCompare" label="默认"></el-option>
+                  <el-option value="dataSortzhb" label="投标数"></el-option>
+                  <el-option value="dataSortzb" label="中标数"></el-option>
+                  <el-option value="dataSortzhl" label="中标率"></el-option>
+                </el-select>
+                <el-radio-group
+                  class="animate__animated animate__fadeInRight"
+                  v-if="dataGeoType !== 'dataLocaleCompare'"
+                  v-model="dataGeoMethod"
+                  size="mini"
+                >
+                  <el-radio label="asec">升序</el-radio>
+                  <el-radio label="dsec">降序</el-radio>
                 </el-radio-group>
               </div>
               <biddingCompany
@@ -131,6 +141,7 @@ export default {
       dataGeoLoading: false,
       dateObj: "",
       dataGeoType: "dataLocaleCompare", // 分公司投标情况排序
+      dataGeoMethod: "dsec",
     };
   },
   mounted() {
@@ -174,22 +185,22 @@ export default {
         });
       }
     },
-    dataSortzb(data) {
+    dataSortzb(data, sort) {
       const _data = JSON.parse(JSON.stringify(data));
       return _data.sort((a, b) => {
-        return b.zbnumb - a.zbnumb;
+        return sort === "asec" ? a.zbnumb - b.zbnumb : b.zbnumb - a.zbnumb;
       });
     },
-    dataSortzhb(data) {
+    dataSortzhb(data, sort) {
       const _data = JSON.parse(JSON.stringify(data));
       return _data.sort((a, b) => {
-        return b.zhbnumb - a.zhbnumb;
+        return sort === "asec" ? a.zhbnumb - b.zhbnumb : b.zhbnumb - a.zhbnumb;
       });
     },
-    dataSortzhl(data) {
+    dataSortzhl(data, sort) {
       const _data = JSON.parse(JSON.stringify(data));
       return _data.sort((a, b) => {
-        return b.zbl_v - a.zbl_v;
+        return sort === "asec" ? a.zbl_v - b.zbl_v : b.zbl_v - a.zbl_v;
       });
     },
     dataLocaleCompare(data) {
@@ -201,7 +212,7 @@ export default {
       });
     },
     formatterData(data) {
-      return this[this.dataGeoType](data);
+      return this[this.dataGeoType](data, this.dataGeoMethod);
     },
     change(time) {
       this.selectTime = time
@@ -279,12 +290,35 @@ export default {
   padding: 10px 10px 0;
   .sortType {
     position: absolute;
-    right: 40px;
+    right: 5px;
     top: 5px;
     z-index: 1000;
-    span {
-      font-size: 12px;
+    .el-select {
+      width: 90px;
+    }
+    ::v-deep .el-radio-group {
+      vertical-align: inherit;
+      .el-radio:first-child {
+        margin: 0 10px 0 5px;
+      }
+      .el-radio__label {
+        font-size: 12px;
+      }
     }
   }
+}
+.move-enter-active,
+.move-leave-active {
+  transition: transform 0.5s;
+}
+
+.move-enter,
+.move-leave-to {
+  transform: translateX(0);
+}
+
+.move-enter-to,
+.move-leave {
+  transform: translateX(100%);
 }
 </style>
