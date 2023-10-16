@@ -21,6 +21,10 @@ export default {
         return [];
       },
     },
+    sort: {
+      type: String,
+      default: "desc",
+    },
   },
   data() {
     return {
@@ -45,6 +49,12 @@ export default {
     },
     getCompany() {
       this.option.xAxis[0].data = this.seriesData.map((data) => data.name);
+      this.option.yAxis[0].max =
+        this.sort === "desc"
+          ? this.seriesData.map((data) => data.zbnumb)[0]
+          : this.seriesData.map((data) => data.zbnumb)[
+              this.seriesData.length - 1
+            ];
       this.option.series[0].data = this.seriesData.map((data) => data.zhbnumb);
       this.option.series[1].data = this.seriesData.map((data) => data.zbnumb);
       this.option.series[2].data = this.seriesData.map((data) => data.zbl_f);

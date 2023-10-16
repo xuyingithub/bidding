@@ -87,13 +87,14 @@
                   v-model="dataGeoMethod"
                   size="mini"
                 >
-                  <el-radio label="asec">升序</el-radio>
-                  <el-radio label="dsec">降序</el-radio>
+                  <el-radio label="asce">升序</el-radio>
+                  <el-radio label="desc">降序</el-radio>
                 </el-radio-group>
               </div>
               <biddingCompany
                 ref="biddingCompany"
                 :seriesData="formatterData(dataGeo)"
+                :sort="dataGeoMethod"
               />
             </el-row>
           </el-col>
@@ -141,7 +142,7 @@ export default {
       dataGeoLoading: false,
       dateObj: "",
       dataGeoType: "dataLocaleCompare", // 分公司投标情况排序
-      dataGeoMethod: "dsec",
+      dataGeoMethod: "desc",
     };
   },
   mounted() {
@@ -188,19 +189,19 @@ export default {
     dataSortzb(data, sort) {
       const _data = JSON.parse(JSON.stringify(data));
       return _data.sort((a, b) => {
-        return sort === "asec" ? a.zbnumb - b.zbnumb : b.zbnumb - a.zbnumb;
+        return sort === "asce" ? a.zbnumb - b.zbnumb : b.zbnumb - a.zbnumb;
       });
     },
     dataSortzhb(data, sort) {
       const _data = JSON.parse(JSON.stringify(data));
       return _data.sort((a, b) => {
-        return sort === "asec" ? a.zhbnumb - b.zhbnumb : b.zhbnumb - a.zhbnumb;
+        return sort === "asce" ? a.zhbnumb - b.zhbnumb : b.zhbnumb - a.zhbnumb;
       });
     },
     dataSortzhl(data, sort) {
       const _data = JSON.parse(JSON.stringify(data));
       return _data.sort((a, b) => {
-        return sort === "asec" ? a.zbl_v - b.zbl_v : b.zbl_v - a.zbl_v;
+        return sort === "asce" ? a.zbl_v - b.zbl_v : b.zbl_v - a.zbl_v;
       });
     },
     dataLocaleCompare(data) {

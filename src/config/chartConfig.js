@@ -335,13 +335,13 @@ export const chartCompany_config = {
     {
       type: "value",
       // min: 0,
-      // max: 100,
-      // interval: 40,
+      max: "dataMax",
+      // interval: 5,
     },
     {
       type: "value",
       // min: 0,
-      // max: 100,
+      // max: "dataMax",
       // interval: 20,
       axisLabel: {
         formatter: "{value} %",
