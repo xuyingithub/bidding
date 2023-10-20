@@ -2,7 +2,7 @@
 * @Description: dashboard
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-10-16
+* @LastEditTime: 2023-10-20
 -->
 <template>
   <section class="dashboard">
@@ -94,7 +94,6 @@
               <biddingCompany
                 ref="biddingCompany"
                 :seriesData="formatterData(dataGeo)"
-                :sort="dataGeoMethod"
               />
             </el-row>
           </el-col>
