@@ -355,6 +355,7 @@ export const chartCompany_config = {
       start: 0, // 起始位置（百分比）
       end: 20, // 结束位置（百分比）
       height: 10,
+      zoomLock: true,
     },
   ],
   series: [
@@ -464,6 +465,7 @@ export const chartBusiness_config = {
       start: 0, // 起始位置（百分比）
       end: 10, // 结束位置（百分比）
       height: 10,
+      zoomLock: true,
     },
   ],
   xAxis: [
