@@ -29,4 +29,4 @@ cd /Program/WebApp/ecology/msdev/
 rm -rf dp/*
 
 
-scp -r dist/* bes@10.3.0.20/Program/WebApp/ecology/msdev/dp/ pass@APP07
+scp -r dist/* bes@10.3.0.20:/Program/WebApp/ecology/msdev/dp/ pass@APP07
