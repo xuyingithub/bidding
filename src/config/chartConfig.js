@@ -353,9 +353,10 @@ export const chartCompany_config = {
       type: "slider", // 使用滑动条型的 dataZoom
       xAxisIndex: 0, // 对应横向坐标轴
       start: 0, // 起始位置（百分比）
-      end: 20, // 结束位置（百分比）
+      end: 60, // 结束位置（百分比）
       height: 10,
       zoomLock: true,
+      brushSelect: false,
     },
   ],
   series: [
@@ -466,6 +467,7 @@ export const chartBusiness_config = {
       end: 10, // 结束位置（百分比）
       height: 10,
       zoomLock: true,
+      brushSelect: false,
     },
   ],
   xAxis: [
