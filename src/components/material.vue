@@ -2,11 +2,18 @@
 * @Description: 材料申请处理时效
 * @Date: 2023-08-23 
 * @Author: xuyin
-* @LastEditTime: 2023-09-13
+* @LastEditTime: 2024-05-11
 -->
 <template>
   <section class="material" v-loading="materialLoading">
-    <h3>材料申请处理情况</h3>
+    <h3 @mouseover="mouseEnter" @mouseleave="mouseLeave">
+      材料申请处理情况
+      <i
+        class="el-icon-download animate__animated animate__fadeIn animate__slower"
+        v-if="exportShow"
+        @click="exportExcel"
+      />
+    </h3>
     <el-table class="header" style="width: 100%; background: transparent">
       <el-table-column label="分公司" min-width="62"></el-table-column>
       <el-table-column label="管理员" min-width="165"></el-table-column>
@@ -36,6 +43,7 @@
 <script>
 import { getMaterial } from "@/api";
 import VueSeamlessScroll from "vue-seamless-scroll";
+import * as XLSX from "xlsx";
 export default {
   name: "material",
   components: {
@@ -55,6 +63,8 @@ export default {
         waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
       },
       materialLoading: false,
+      exportShow: false,
+      timer: "",
     };
   },
   mounted() {
@@ -75,10 +85,32 @@ export default {
         this.tableData = this.tableData.sort((a, b) => {
           return b.num - a.num;
         });
+        console.log("this.tableData", this.tableData);
       }
     },
     formatterNum(row, column, cellValue) {
       return cellValue > 0 ? cellValue : "-";
+    },
+    mouseEnter() {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.exportShow = true;
+      }, 3000);
+    },
+    mouseLeave() {
+      clearTimeout(this.timer);
+      this.exportShow = false;
+    },
+    exportExcel() {
+      const data = this.tableData.map((data) => ({
+        分公司: data.name,
+        管理员: data.jsname,
+        代办流程数量: data.num,
+      }));
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.json_to_sheet(data);
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+      XLSX.writeFile(wb, "材料申请处理情况.xlsx");
     },
   },
 };
@@ -93,6 +125,10 @@ export default {
     font-weight: bold;
     line-height: 29px;
     padding-left: 8px;
+    i {
+      cursor: pointer;
+      font-weight: bold;
+    }
   }
   ::v-deep .header {
     .el-table__body-wrapper {
